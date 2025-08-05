@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Navbar from './layout/Navbar'
 import './App.css'
 import api from './api/axios'
-import TreatmentList from './features/treatments/TreatmentList'
+import TreatmentPage from './features/treatments/TreatmentPage'
 import Calculator from './features/calculator/Calculator'
 
 function App() {
@@ -13,13 +13,15 @@ function App() {
     setView(val)
   }
 
+  console.log('view', view)
+
   return (
     <div className=''>
       <Navbar handleViewChange={handleViewChange} />
 
-      <div className='flex flex-col gap-4 max-w-4xl mx-auto bg-green-400'>
+      <div className='flex flex-col gap-4 max-w-4xl mx-auto'>
         {view === 'treatments' && (
-          <TreatmentList />
+          <TreatmentPage />
         )}
 
         {view === 'calculator' && (

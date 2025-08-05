@@ -17,9 +17,25 @@ def load_data():
                 return []
     return []
         
-def save_data(data):
+def save_data(new_treatment):
+    # Check if file exists and load existing treatments
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, 'r') as f:
+            try:
+                treatments = json.load(f)
+                if not isinstance(treatments, list):
+                    treatments = [treatments]  # Handle case where JSON was a single object
+            except json.JSONDecodeError:
+                treatments = []
+    else:
+        treatments = []
+
+    # Append the new treatment
+    treatments.append(new_treatment)
+
+    # Save updated array back to file
     with open(DATA_FILE, 'w') as f:
-        json.dump(data, f, indent=2)
+        json.dump(treatments, f, indent=2)
 
 
 @app.route('/api/treatments', methods=['GET'])
@@ -40,8 +56,18 @@ def get_treatments():
 def add_treatment():
     try:
         treatment = request.get_json() 
+        required_fields = ['code', 'description', 'fee', 'category']
+        missing_fields = [field for field in required_fields if field not in treatment or treatment[field] == '']
+        
+        if missing_fields:
+            return jsonify({'error': f'Missing required fields: {", ".join(missing_fields)}'}), 400
+
         print(f'Treatment:', treatment)
-        return jsonify({'message': 'Treatment added successfully'}), 201
+        save_data(treatment)
+        return jsonify({
+            'message': 'Treatment added successfully',
+            'saved_treatment': treatment
+            }), 201
 
     except Exception as e:
         print('Error adding new treatment:', e)
