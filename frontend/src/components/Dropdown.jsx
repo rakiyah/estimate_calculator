@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react"
 
-const Dropdown = ({ options, name, onChange }) => {
+const Dropdown = ({ options, name, onChange, initialOption }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [selectedOption, setSelectedOption] = useState(initialOption || null)
   const dropdownRef = useRef(null)
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Dropdown = ({ options, name, onChange }) => {
     e.stopPropagation();
     console.log('Selected:', option);
     onChange(name, option.id)
-    setSelectedOption(option.label)
+    setSelectedOption(option)
     setIsOpen(false);
   };  
 
@@ -36,7 +36,7 @@ const Dropdown = ({ options, name, onChange }) => {
         type='button'
         onClick={toggleDropdown} 
         className="px-4 py-1 w-36 bg-blue-500 text-white rounded-lg cursor-pointer">
-        {selectedOption || 'Select option'}
+        {selectedOption?.label || 'Select option'}
       </button>
 
       {isOpen && (

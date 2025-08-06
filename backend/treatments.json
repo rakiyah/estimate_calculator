@@ -1,10 +1,138 @@
 [
   {
-    "code": "1234",
+    "code": "009995",
     "description": "PPE/STERILE SETUP",
     "fee": "65",
-    "covered": "",
+    "covered": false,
     "write_off": "",
     "category": "general"
+  },
+  {
+    "code": "009220",
+    "description": "GENERAL ANESTHESIA/DEEP SEDATION",
+    "fee": "840",
+    "covered": true,
+    "write_off": "90",
+    "category": "general"
+  },
+  {
+    "code": "007210",
+    "description": "SURG REM ERUPTED TOOTH",
+    "fee": "395",
+    "covered": true,
+    "write_off": "80",
+    "category": "extraction"
+  },
+  {
+    "code": "007230",
+    "description": "SURG REM PART BONY IMPACTED",
+    "fee": "545",
+    "covered": true,
+    "write_off": "65",
+    "category": "extraction"
+  },
+  {
+    "code": "007240",
+    "description": "SURG REM COMP BONY IMPACTED",
+    "fee": "630",
+    "covered": true,
+    "write_off": "60",
+    "category": "extraction"
+  },
+  {
+    "code": "007140",
+    "description": "UNCOMPLICATED EXTRACTION",
+    "fee": "275",
+    "covered": true,
+    "write_off": "90",
+    "category": "extraction"
+  },
+  {
+    "code": "011122",
+    "description": "EXPAREL",
+    "fee": "415",
+    "covered": false,
+    "write_off": "",
+    "category": "extraction"
+  },
+  {
+    "code": "021515",
+    "description": "SOCKIT",
+    "fee": "45",
+    "covered": false,
+    "write_off": "",
+    "category": "extraction"
+  },
+  {
+    "code": "006010",
+    "description": "IMPLANT FIXTURE PLACE.",
+    "fee": "3100",
+    "covered": true,
+    "write_off": "475",
+    "category": "implant"
+  },
+  {
+    "code": "021508",
+    "description": "IMPLANT PLACEMENT",
+    "fee": "4000",
+    "covered": true,
+    "write_off": "475",
+    "category": "implant"
+  },
+  {
+    "code": "004264",
+    "description": "COLLAPLUG",
+    "fee": "83",
+    "covered": true,
+    "write_off": "83",
+    "category": "perio"
+  },
+  {
+    "code": "004288",
+    "description": "BIO-OSS/CREOSS",
+    "fee": "900",
+    "covered": true,
+    "write_off": "",
+    "category": "perio"
+  },
+  {
+    "code": "004259",
+    "description": "SOCKET GRAFT",
+    "fee": "725",
+    "covered": true,
+    "write_off": "",
+    "category": "perio"
+  },
+  {
+    "code": "000112",
+    "description": "LPRF PLATELET THERAPY",
+    "fee": "200",
+    "covered": false,
+    "write_off": "",
+    "category": "perio"
+  },
+  {
+    "code": "004290",
+    "description": "LAMINAR BONE",
+    "fee": "660",
+    "covered": false,
+    "write_off": "",
+    "category": "perio"
+  },
+  {
+    "code": "021552",
+    "description": "PERICARDIUM SHEET",
+    "fee": "500",
+    "covered": false,
+    "write_off": "",
+    "category": "perio"
+  },
+  {
+    "code": "001330",
+    "description": "CORONECTOMY",
+    "fee": "750",
+    "covered": true,
+    "write_off": "15",
+    "category": "extraction"
   }
 ]

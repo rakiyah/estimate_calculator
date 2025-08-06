@@ -73,5 +73,51 @@ def add_treatment():
         print('Error adding new treatment:', e)
         return jsonify({'error': 'Failed to add new treatment'}), 400
 
+
+@app.route('/api/treatments/<code>', methods=['PUT'])
+def update_treatment(code):
+    try:
+        updated_data = request.get_json()
+        treatments = load_data()
+        found = False
+
+        for i, treatment in enumerate(treatments):
+            if treatment.get('code') == code:
+                treatments[i] = {**treatment, **updated_data}
+                found = True
+                break
+
+        if not found:
+            return jsonify({'error': 'Treatment not found'}), 404
+
+        with open(DATA_FILE, 'w') as f:
+            json.dump(treatments, f, indent=2)
+
+        return jsonify({'message': 'Treatment updated', 'updated_treatment': updated_data}), 200
+
+    except Exception as e:
+        print('Error updating treatment:', e)
+        return jsonify({'error': 'Failed to update treatment'}), 400
+
+
+@app.route('/api/treatments/<code>', methods=['DELETE'])
+def delete_treatment(code):
+    try:
+        treatments = load_data()
+        updated_treatments = [t for t in treatments if t.get('code') != code]
+
+        if len(updated_treatments) == len(treatments):
+            return jsonify({'error': 'Treatment not found'}), 404
+
+        with open(DATA_FILE, 'w') as f:
+            json.dump(updated_treatments, f, indent=2)
+
+        return jsonify({'message': 'Treatment deleted'}), 200
+
+    except Exception as e:
+        print('Error deleting treatment:', e)
+        return jsonify({'error': 'Failed to delete treatment'}), 400
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5005, debug=True)

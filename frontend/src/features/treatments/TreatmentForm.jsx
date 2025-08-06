@@ -3,15 +3,16 @@ import Checkbox from "../../components/Checkbox"
 import Dropdown from "../../components/Dropdown"
 import categories from "../../data/categories"
 
-const AddTreatment = ({ onAddTreatment, reset }) => {
+const TreatmentForm = ({ onSubmit, onCancel, initialData = {} }) => {
   const [form, setForm] = useState({
-    code: '',
-    description: '',
-    fee: '',
-    covered: '',
-    write_off: '',
-    category: ''
+    code: initialData.code || '',
+    description: initialData.description || '',
+    fee: initialData.fee || '',
+    covered: initialData.covered || false,
+    write_off: initialData.write_off || '',
+    category: initialData.category || '',
   })
+
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -27,7 +28,7 @@ const AddTreatment = ({ onAddTreatment, reset }) => {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 bg-zinc-50 border border-blue-900 absolute p-3 rounded-lg z-10 top-2 right-2'>
       <form className="flex flex-col gap-2 max-w-2xl w-full">
         <label className='flex flex-row items-center justify-between gap-2'>
           <div className="uppercase">Category</div>
@@ -35,6 +36,9 @@ const AddTreatment = ({ onAddTreatment, reset }) => {
             name='category'
             onChange={handleCategoryChange}
             options={categories}
+            initialOption={
+              categories.find(cat => cat.id === form.category) || null
+            }
           />
         </label>
         
@@ -91,13 +95,13 @@ const AddTreatment = ({ onAddTreatment, reset }) => {
 
     <div className="w-full flex justify-between">
       <button 
-        onClick={reset}
+        onClick={onCancel}
         className='bg-rose-400 cursor-pointer px-8 py-2 rounded-full'>
           Cancel
       </button>
 
       <button 
-        onClick={() => onAddTreatment(form)}
+        onClick={() => onSubmit(form)}
         className='bg-emerald-400 cursor-pointer px-8 py-2 rounded-full'>
           Submit
       </button>
@@ -107,4 +111,4 @@ const AddTreatment = ({ onAddTreatment, reset }) => {
   )
 }
 
-export default AddTreatment
+export default TreatmentForm
