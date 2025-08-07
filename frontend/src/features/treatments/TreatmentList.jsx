@@ -3,7 +3,7 @@ import { FiEdit3, FiTrash2 } from "react-icons/fi";
 const TreatmentList = ({ treatments, onEdit, onDelete }) => {
 
   return (
-    <div className='flex flex-col gap-2 overflow-hidden rounded-lg border border-blue-900'>
+    <div className='flex flex-col text-sm gap-2 overflow-hidden rounded-lg border border-blue-900'>
       <table className="">
         <thead>
           <tr>
@@ -33,12 +33,12 @@ const TreatmentList = ({ treatments, onEdit, onDelete }) => {
                 <div 
                   onClick={() => onEdit(t)}
                   className="cursor-pointer">
-                  <FiEdit3 className="text-2xl" />
+                  <FiEdit3 className="text-xl" />
                 </div>
                 <div 
                   onClick={() => onDelete(t)}
                   className="cursor-pointer">
-                  <FiTrash2 className="text-2xl" />
+                  <FiTrash2 className="text-xl" />
                 </div>
               </td>
             </tr>

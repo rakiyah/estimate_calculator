@@ -6,7 +6,7 @@ import TreatmentPage from './features/treatments/TreatmentPage'
 import Calculator from './features/calculator/Calculator'
 
 function App() {
-  const [view, setView] = useState('treatments')
+  const [view, setView] = useState('calculator')
 
 
   const handleViewChange = (val) => {
