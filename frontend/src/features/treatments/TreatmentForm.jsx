@@ -5,6 +5,7 @@ import categories from "../../data/categories"
 
 const TreatmentForm = ({ onSubmit, onCancel, initialData = {} }) => {
   const [form, setForm] = useState({
+    moda: initialData.moda || false,
     code: initialData.code || '',
     description: initialData.description || '',
     fee: initialData.fee || '',

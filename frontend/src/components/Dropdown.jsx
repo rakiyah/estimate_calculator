@@ -1,21 +1,37 @@
 import { useState, useRef, useEffect } from "react"
 
-const Dropdown = ({ options, name, onChange, initialOption }) => {
+const Dropdown = ({ options, name, onChange, initialOption, width = 'w-36' }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState(initialOption || null)
   const dropdownRef = useRef(null)
 
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //       setIsOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener('click', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, []);
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  const handleClickOutside = (event) => {
+    if (
+      isOpen &&
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target)
+    ) {
+      setIsOpen(false)
+    }
+  }
+
+  document.addEventListener("click", handleClickOutside)
+  return () => {
+    document.removeEventListener("click", handleClickOutside)
+  }
+}, [isOpen])
 
   const toggleDropdown = (e) => {
     e.stopPropagation()
@@ -35,7 +51,7 @@ const Dropdown = ({ options, name, onChange, initialOption }) => {
       <button
         type='button'
         onClick={toggleDropdown} 
-        className="px-4 py-1 w-36 bg-blue-500 text-white rounded-lg cursor-pointer">
+        className={`px-4 py-1 ${width} bg-blue-500 text-white rounded-lg cursor-pointer`}>
         {selectedOption?.label || 'Select option'}
       </button>
 

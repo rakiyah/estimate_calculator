@@ -2,8 +2,9 @@ import { useState } from "react"
 import Benefits from "./BenefitsForm"
 import TreatmentPlanForm from "./TreatmentPlanForm"
 
-const Calculator = () => {
+const Calculator = ({ treatments, handleAddTreatment }) => {
   const [benefits, setBenefits] = useState({
+    moda: '',
     max: '',
     remaining: '',
     deductible: '',
@@ -18,10 +19,8 @@ const Calculator = () => {
     setShowTreatmentPlan(true)
   }
 
-  console.log('show treatment plan:', showTreatmentPlan)
-
   return (
-    <div className="flex justify-between p-4">
+    <div className="flex p-4 gap-10">
       <Benefits 
         benefits={benefits}
         setBenefits={setBenefits}
@@ -29,7 +28,9 @@ const Calculator = () => {
       />
 
       {showTreatmentPlan && (
-        <TreatmentPlanForm />
+        <TreatmentPlanForm 
+          treatments={treatments}
+        />
       )}
     </div>
   )

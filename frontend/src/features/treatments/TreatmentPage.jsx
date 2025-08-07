@@ -5,43 +5,31 @@ import TreatmentList from './TreatmentList';
 import TreatmentForm from './TreatmentForm';
 import Modal from '../../components/Modal';
 
-const TreatmentPage = () => {
-  const [treatments, dispatch] = useReducer(treatmentReducer, [])
+const TreatmentPage = ({ treatments, handleAddTreatment, dispatch }) => {
+  // const [treatments, dispatch] = useReducer(treatmentReducer, [])
   const [showForm, setShowForm] = useState(false)
   const [treatmentToEdit, setTreatmentToEdit] = useState({})
   const [treatmentToDelete, setTreatmentToDelete] = useState(null)
 
   const isEditMode = Boolean(treatmentToEdit?.code)
 
-  useEffect(() => {
-    api.get('/treatments')
-      .then((res) => {
-        dispatch({
-          type: 'SET_TREATMENTS',
-          payload: res.data
-        })
-      })
-      .catch((err) => {
-        console.error('Error fetching treatments:', err);
-      });
-  }, []);
 
-  async function handleAddTreatment(treatment) {
-    try {
-      console.log('Sending treatment data to backend')
-      const res = await api.post('/treatments', treatment)
-      const savedTreatment = res.data.saved_treatment
-      console.log('saved treatment:', res.data.saved_treatment)
-      dispatch({
-        type: 'ADD_TREATMENT',
-        savedTreatment
-      })
-      setShowForm(false)
-    } catch (error) {
-      console.log('Error adding treatment:', error)
-      alert('Failed to add treatment. Please try again.');
-    }
-  }
+  // async function handleAddTreatment(treatment) {
+  //   try {
+  //     console.log('Sending treatment data to backend')
+  //     const res = await api.post('/treatments', treatment)
+  //     const savedTreatment = res.data.saved_treatment
+  //     console.log('saved treatment:', res.data.saved_treatment)
+  //     dispatch({
+  //       type: 'ADD_TREATMENT',
+  //       savedTreatment
+  //     })
+  //     setShowForm(false)
+  //   } catch (error) {
+  //     console.log('Error adding treatment:', error)
+  //     alert('Failed to add treatment. Please try again.');
+  //   }
+  // }
 
   // Show TreatmentForm for editing
   function handleEditTreatment(treatment) {
@@ -77,8 +65,6 @@ const TreatmentPage = () => {
   }
 
   const handleConfirmDelete = async (treatment) => {
-    
-
     try {
       const res = await api.delete(`/treatments/${treatment.code}`)
       console.log('Response:', res.data) 

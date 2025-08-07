@@ -16,6 +16,11 @@ const BenefitsForm = ({ benefits, setBenefits, onSave }) => {
     setBenefits((prev) => ({ ...prev, [name]: value }));
   }
 
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target
+    setBenefits((prev) => ({ ...prev, [name]: checked }))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     onSave()
@@ -28,9 +33,22 @@ const BenefitsForm = ({ benefits, setBenefits, onSave }) => {
 
       <form onSubmit={handleSubmit} className=" w-full flex flex-col gap-2">
         <div className="flex flex-row items-center justify-between">
-          <label>Max</label>
+          <label>MODA/ODS/DELTA DENTAL</label>
 
-          
+            <div className="flex items-center justify-center w-20">
+              <input 
+                type='checkbox'
+                name='moda'
+                checked={benefits.moda}
+                value={benefits.moda}
+                onChange={handleCheckboxChange}
+              />
+              {/* <span>remaining = max</span> */}
+            </div>
+        </div>         
+        
+        <div className="flex flex-row items-center justify-between">
+          <label>Max</label>
           <div className="flex flex-col items-center gap-1">
             <div className="relative">
               <input 
@@ -38,14 +56,11 @@ const BenefitsForm = ({ benefits, setBenefits, onSave }) => {
                 name='max'
                 value={benefits.max}
                 onChange={handleChange}
-                className="px-2 py-0.5 w-24 pl-4 rounded-lg border border-blue-900 no-spinner"
+                className="px-2 py-0.5 w-20 pl-4 rounded-lg border border-blue-900 no-spinner"
               />
               <span className="absolute left-1 top-1/2 -translate-y-1/2">$</span>
             </div>
-
-
           </div>
-
         </div> 
 
         <div className="flex flex-row items-center justify-between">
@@ -67,7 +82,7 @@ const BenefitsForm = ({ benefits, setBenefits, onSave }) => {
               name='remaining'
               value={benefits.remaining}
               onChange={handleChange}
-              className="px-2 py-0.5 w-24 pl-4 rounded-lg border border-blue-900 no-spinner"
+              className="px-2 py-0.5 w-20 pl-4 rounded-lg border border-blue-900 no-spinner"
             />
             <span className="absolute left-1 top-1/2 -translate-y-1/2">$</span>
           </div>
