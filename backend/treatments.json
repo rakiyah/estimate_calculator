@@ -96,14 +96,6 @@
     "category": "perio"
   },
   {
-    "code": "004259",
-    "description": "SOCKET GRAFT",
-    "fee": "725",
-    "covered": true,
-    "write_off": "",
-    "category": "perio"
-  },
-  {
     "code": "000112",
     "description": "LPRF PLATELET THERAPY",
     "fee": "200",
@@ -134,5 +126,14 @@
     "covered": true,
     "write_off": "15",
     "category": "extraction"
+  },
+  {
+    "moda": false,
+    "code": "004259",
+    "description": "SOCKET GRAFT",
+    "fee": "925",
+    "covered": true,
+    "write_off": "",
+    "category": "perio"
   }
 ]

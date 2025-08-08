@@ -9,6 +9,7 @@ import Calculator from './features/calculator/Calculator'
 function App() {
   const [view, setView] = useState('calculator')
   const [treatments, dispatch] = useReducer(treatmentReducer, [])
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     api.get('/treatments')
@@ -57,6 +58,8 @@ function App() {
             treatments={treatments}
             handleAddTreatment={handleAddTreatment}
             dispatch={dispatch}
+            showForm={showForm}
+            setShowForm={setShowForm}
           />
         )}
 

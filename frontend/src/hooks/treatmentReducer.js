@@ -16,11 +16,13 @@ export function treatmentReducer(treatments, action) {
 
     case 'UPDATE_TREATMENT': {
       console.log('Action:', action)
-      const { code, category, description, fee, covered, write_off } = action.updatedTreatment;
-      return [
-        ...treatments,
-        { code, category, description, fee, covered, write_off }
-      ]
+      const updated = action.updatedTreatment
+
+      return treatments.map(t => 
+        t.code === updated.code
+        ? { ...action, ...updated }
+        : t
+      )
     }
 
     case 'DELETE_TREATMENT': {

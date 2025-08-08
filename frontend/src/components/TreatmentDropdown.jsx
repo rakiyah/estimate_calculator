@@ -5,36 +5,22 @@ const TreatmentDropdown = ({ treatmentsByCategory, onSelect, width = 'w-32' }) =
   const [selectedOption, setSelectedOption] = useState(null)
   const treatmentDropdownRef = useRef(null) 
 
-  console.log(treatmentsByCategory)
-  
-//   useEffect(() => {
-//     const handleClickOutside = (event) => {
-//       if (treatmentDropdownRef.current && !treatmentDropdownRef.current.contains(event.target)) {
-//         setIsOpen(false);
-//       }
-//     };
-//     document.addEventListener('click', handleClickOutside);
-//     return () => {
-//       document.removeEventListener('click', handleClickOutside);
-//     };
-//   }, []);
-
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (
-      isOpen &&
-      treatmentDropdownRef.current &&
-      !treatmentDropdownRef.current.contains(event.target)
-    ) {
-      setIsOpen(false)
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        treatmentDropdownRef.current &&
+        !treatmentDropdownRef.current.contains(event.target)
+      ) {
+        setIsOpen(false)
+      }
     }
-  }
 
-  document.addEventListener("click", handleClickOutside)
-  return () => {
-    document.removeEventListener("click", handleClickOutside)
-  }
-}, [isOpen])
+    document.addEventListener("click", handleClickOutside)
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [isOpen])
 
   const toggleDropdown = (e) => {
     e.stopPropagation()
@@ -43,21 +29,21 @@ useEffect(() => {
 
   const handleOptionClick = (e, treatment) => {
     e.stopPropagation();
-    console.log('Selected:', treatment);
+    // console.log('Selected:', treatment);
     onSelect(treatment)
     // setSelectedOption(option)
     setIsOpen(false);
   };  
 
-  console.log(isOpen)
+  // console.log(isOpen)
 
   return (
-    <div className="relative overflow-visible" ref={treatmentDropdownRef}>
+    <div className="relative inline-block" ref={treatmentDropdownRef}>
       <button
         type='button'
         onClick={toggleDropdown} 
         className={`px-4 py-1 ${width} bg-blue-500 text-white rounded-lg cursor-pointer`}>
-        'Select option'
+        Select option
       </button>
 
       {isOpen && (

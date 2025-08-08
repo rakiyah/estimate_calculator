@@ -5,9 +5,9 @@ import TreatmentList from './TreatmentList';
 import TreatmentForm from './TreatmentForm';
 import Modal from '../../components/Modal';
 
-const TreatmentPage = ({ treatments, handleAddTreatment, dispatch }) => {
+const TreatmentPage = ({ treatments, handleAddTreatment, dispatch, showForm, setShowForm }) => {
   // const [treatments, dispatch] = useReducer(treatmentReducer, [])
-  const [showForm, setShowForm] = useState(false)
+
   const [treatmentToEdit, setTreatmentToEdit] = useState({})
   const [treatmentToDelete, setTreatmentToDelete] = useState(null)
 

@@ -1,6 +1,7 @@
 import { useState } from "react"
-import Benefits from "./BenefitsForm"
-import TreatmentPlanForm from "./TreatmentPlanForm"
+import Benefits from "../benefits/BenefitsForm"
+import TreatmentPlanForm from "../treatment-plan/TreatmentPlanForm"
+import Estimator from "./Estimator"
 
 const Calculator = ({ treatments, handleAddTreatment }) => {
   const [benefits, setBenefits] = useState({
@@ -12,24 +13,47 @@ const Calculator = ({ treatments, handleAddTreatment }) => {
     extractions: '',
     implants: ''
   })
+  const [lineItems, setLineItems] = useState([])
 
   const [showTreatmentPlan, setShowTreatmentPlan] = useState(false)
+  const [currentStep, setCurrentStep] = useState('benefits')
+
 
   const handleSaveBenefits = () => {
     setShowTreatmentPlan(true)
+    setCurrentStep('treatment')
+  }
+
+  const handleSetTreatmentPlan = () => {
+    setCurrentStep('estimator')
   }
 
   return (
-    <div className="flex p-4 gap-10">
-      <Benefits 
-        benefits={benefits}
-        setBenefits={setBenefits}
-        onSave={handleSaveBenefits}
-      />
+    <div className="flex flex-col items-center p-4 gap-4">
+      <h1>Patient Name</h1>
 
-      {showTreatmentPlan && (
+      {currentStep === 'benefits' && (
+        <Benefits 
+          benefits={benefits}
+          setBenefits={setBenefits}
+          onSave={handleSaveBenefits}
+        />
+      )}
+
+
+      {currentStep === 'treatment' && (
         <TreatmentPlanForm 
           treatments={treatments}
+          lineItems={lineItems}
+          setLineItems={setLineItems}
+          onSet={handleSetTreatmentPlan}
+        />
+      )}
+
+      {currentStep === 'estimator' && (
+        <Estimator 
+          lineItems={lineItems}
+          benefits={benefits}
         />
       )}
     </div>
