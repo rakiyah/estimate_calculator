@@ -4,7 +4,7 @@ import { treatmentReducer } from './hooks/treatmentReducer';
 import Navbar from './layout/Navbar'
 import './App.css'
 import TreatmentPage from './features/treatments/TreatmentPage'
-import Calculator from './features/calculator/Calculator'
+import Wrapper from './features/calculator/Wrapper'
 
 function App() {
   const [view, setView] = useState('calculator')
@@ -45,9 +45,6 @@ function App() {
     }
   }
 
-  console.log('view', view)
-  console.log('Treatments:', treatments)
-
   return (
     <div className=''>
       <Navbar handleViewChange={handleViewChange} />
@@ -64,7 +61,7 @@ function App() {
         )}
 
         {view === 'calculator' && (
-          <Calculator 
+          <Wrapper 
             treatments={treatments}
             handleAddTreatment={handleAddTreatment}
           />

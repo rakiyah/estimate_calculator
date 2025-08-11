@@ -17,6 +17,7 @@ const LineItem = ({
   const [editFee, setEditFee] = useState(false)
   const [editWriteOff, setEditWriteOff] = useState(false)
 
+  console.log('item:', item)
   const handleChangeItem = (e) => {
     const { name, value } = e.target
     onChangeItem(index, name, value)

@@ -21,6 +21,11 @@ const TreatmentPlanForm = ({ treatments, lineItems, setLineItems, onSet }) => {
     return total
   }
 
+  console.log('lineItems:', lineItems)
+
+    // console.log('treatments', treatments)
+    // console.log('line items'. lineItems)
+
   const handleAddItem = () => {
     setLineItems([
       ...lineItems, 

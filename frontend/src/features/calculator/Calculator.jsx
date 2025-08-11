@@ -1,62 +1,48 @@
-import { useState } from "react"
-import Benefits from "../benefits/BenefitsForm"
-import TreatmentPlanForm from "../treatment-plan/TreatmentPlanForm"
-import Estimator from "./Estimator"
+import { useState, useMemo } from "react"
 
-const Calculator = ({ treatments, handleAddTreatment }) => {
-  const [benefits, setBenefits] = useState({
-    moda: '',
-    max: '',
-    remaining: '',
-    deductible: '',
-    anesthesia: '',
-    extractions: '',
-    implants: ''
-  })
-  const [lineItems, setLineItems] = useState([])
+const Calculator = ({ benefits, lineItems, getTotal }) => {
+  const total = useMemo(() => getTotal?.() ?? 0, [getTotal])
+  const hasModa = !!benefits.moda
+  console.log('Moda:', hasModa)
 
-  const [showTreatmentPlan, setShowTreatmentPlan] = useState(false)
-  const [currentStep, setCurrentStep] = useState('benefits')
+  const estimated = useMemo(() => {
+    return lineItems.reduce((sum, item) => {
+      const fee = Number(item.fee) || 0
+      const writeOff = Number(item.write_off) || 0
+      const isCovered = !!item.covered
+      // const hasModa = !!benefits.moda
+      console.log('write off:', writeOff)
+      
 
+      let adj = fee
+      
 
-  const handleSaveBenefits = () => {
-    setShowTreatmentPlan(true)
-    setCurrentStep('treatment')
-  }
+      switch (item.code) {
+        // Anesthesia
+        case "009220": {
+          console.log('Adj:', adj)
+          const coverage = Number(benefits.anesthesia) || 0
+          console.log('coverage', coverage)
+          if (hasModa) adj = adj - writeOff
+          console.log('Adj after writeoff:', adj)
 
-  const handleSetTreatmentPlan = () => {
-    setCurrentStep('estimator')
-  }
+          if (coverage > 0) {
+            const pct = coverage / 100
+            console.log('%:', pct)
+            adj = fee * pct
+          } else {
+            adj = fee
+          }
+          // console.log('Adj:', adj)
+        }
+      }
+
+      return sum + adj
+    }, 0)
+  }, [lineItems])
 
   return (
-    <div className="flex flex-col items-center p-4 gap-4">
-      <h1>Patient Name</h1>
-
-      {currentStep === 'benefits' && (
-        <Benefits 
-          benefits={benefits}
-          setBenefits={setBenefits}
-          onSave={handleSaveBenefits}
-        />
-      )}
-
-
-      {currentStep === 'treatment' && (
-        <TreatmentPlanForm 
-          treatments={treatments}
-          lineItems={lineItems}
-          setLineItems={setLineItems}
-          onSet={handleSetTreatmentPlan}
-        />
-      )}
-
-      {currentStep === 'estimator' && (
-        <Estimator 
-          lineItems={lineItems}
-          benefits={benefits}
-        />
-      )}
-    </div>
+    <div>Calculator</div>
   )
 }
 
